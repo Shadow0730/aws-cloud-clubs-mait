@@ -1,5 +1,59 @@
 import type { SVGProps } from "react";
 
+export type FacultyMember = {
+  id: number;
+  name: string;
+  roleLabel?: string; // e.g. "FACULTY"
+  desc: string;
+  imageSrc?: string;
+  socials?: {
+    linkedin?: string;
+  };
+};
+
+export const facultyMembers: FacultyMember[] = [
+  {
+    id: 1,
+    name: "Dr. Bhaskar Kapoor",
+    roleLabel: "FACULTY",
+    desc: "Empowering students with mentorship that blends wisdom",
+    imageSrc: "/faculty/dr-bhaskar.jpg",
+    socials: { linkedin: "https://www.linkedin.com/in/dr-bhaskar-kapoor-6b4b7819/" },
+  },
+  {
+    id: 2,
+    name: "Dr. Bhoomi Gupta",
+    roleLabel: "FACULTY",
+    desc: "A communications lead who connects people and ideas",
+    imageSrc: "/faculty/dr-bhoomi.jpg",
+    socials: { linkedin: "https://www.linkedin.com/in/dr-bhoomi-gupta-3278a734/" },
+  },
+  {
+    id: 3,
+    name: "Dr. Monika Bhardwaj",
+    roleLabel: "FACULTY",
+    desc: "Organizes memorable experiences and events that leave a lasting impact",
+    imageSrc: "/faculty/dr-monika.jpg",
+    socials: { linkedin: "https://www.linkedin.com/in/monika-bhardwaj-7709a3a9/" },
+  },
+  {
+    id: 4,
+    name: "Vikas Mani Tripathi",
+    roleLabel: "FACULTY",
+    desc: "Guiding students with expertise and dedication",
+    imageSrc: "/faculty/vikas-mani.jpg",
+    socials: { linkedin: "https://www.linkedin.com/in/vikas-mani-tripathi/" },
+  },
+  {
+    id: 5,
+    name: "Sanjana Deswal",
+    roleLabel: "FACULTY",
+    desc: "Inspiring excellence through innovative teaching and mentorship",
+    imageSrc: "/faculty/sanjana-deswal.jpg",
+    socials: { linkedin: "https://www.linkedin.com/in/sanjana-deswal-4b390616a/" },
+  },
+];
+
 export type Socials = {
   linkedin?: string;
   instagram?: string;

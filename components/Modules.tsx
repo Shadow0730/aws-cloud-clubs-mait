@@ -10,7 +10,7 @@ const slides = [
     subtitle: "Faculty & Team Collaboration",
   },
   {
-    image: "/slide-campus.png",
+    image: "/slide-campus.jpg",
     title: "MAIT Campus",
     subtitle: "Our Learning Hub",
   },

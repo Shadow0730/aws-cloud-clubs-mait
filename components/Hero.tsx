@@ -46,10 +46,11 @@ export default function Hero() {
         <div className="space-y-8 text-center lg:text-left">
           {/* Overline Badge */}
           <div
-            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-label text-xs font-bold tracking-[0.15rem] uppercase transition-all duration-700 ease-out ${isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-              }`}
+            className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-label text-xs font-bold tracking-[0.15rem] uppercase transition-all duration-700 ease-out ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5"
+            }`}
             style={{
               background: "rgba(205, 229, 255, 0.6)",
               color: "#001d32",
@@ -67,16 +68,17 @@ export default function Hero() {
 
           {/* Main Headline */}
           <h1
-            className={`font-headline font-extrabold leading-[0.88] tracking-[-0.03em] transition-all duration-700 ease-out delay-100 ${isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-              }`}
+            className={`font-headline font-extrabold leading-none tracking-[-0.03em] overflow-visible transition-all duration-700 ease-out delay-100 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5"
+            }`}
             style={{ color: "#191c1e" }}
           >
             <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl block">
               AWS{" "}
               <span
-                className="italic"
+                className="italic inline-block pr-2"
                 style={{
                   background: "linear-gradient(135deg, #002041, #003566)",
                   WebkitBackgroundClip: "text",
@@ -93,24 +95,26 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p
-            className={`text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-body transition-all duration-700 ease-out delay-200 ${isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-              }`}
+            className={`text-base sm:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-body transition-all duration-700 ease-out delay-200 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5"
+            }`}
             style={{ color: "#43474f" }}
           >
             A community of students passionate about{" "}
-            <strong style={{ color: "#002041" }}>Amazon Web Services</strong>. We
-            organize workshops, hackathons, and cloud events to help members
+            <strong style={{ color: "#002041" }}>Amazon Web Services</strong>.
+            We organize workshops, hackathons, and cloud events to help members
             learn, grow, and build on the cloud.
           </p>
 
           {/* CTA Buttons */}
           <div
-            className={`flex flex-col sm:flex-row gap-4 justify-center lg:justify-start transition-all duration-700 ease-out delay-300 ${isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-              }`}
+            className={`flex flex-col sm:flex-row gap-4 justify-center lg:justify-start transition-all duration-700 ease-out delay-300 ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5"
+            }`}
           >
             {/* Primary CTA */}
 
@@ -134,10 +138,11 @@ export default function Hero() {
 
           {/* Social Proof / Community Stat */}
           <div
-            className={`flex items-center gap-3 justify-center lg:justify-start transition-all duration-700 ease-out delay-[400ms] ${isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-5"
-              }`}
+            className={`flex items-center gap-3 justify-center lg:justify-start transition-all duration-700 ease-out delay-[400ms] ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-5"
+            }`}
           >
             {/* Stacked Avatars */}
             <div className="flex -space-x-3">
@@ -164,10 +169,7 @@ export default function Hero() {
               >
                 +20 Members
               </p>
-              <p
-                className="text-xs font-body"
-                style={{ color: "#737780" }}
-              >
+              <p className="text-xs font-body" style={{ color: "#737780" }}>
                 Growing community
               </p>
             </div>
@@ -177,10 +179,11 @@ export default function Hero() {
         {/* Right Column - Visual Composition */}
         <div className="relative flex justify-center items-center">
           <div
-            className={`relative w-full max-w-lg transition-all duration-1000 ease-out delay-200 ${isVisible
-              ? "opacity-100 translate-y-0 scale-100"
-              : "opacity-0 translate-y-8 scale-95"
-              }`}
+            className={`relative w-full max-w-lg transition-all duration-1000 ease-out delay-200 ${
+              isVisible
+                ? "opacity-100 translate-y-0 scale-100"
+                : "opacity-0 translate-y-8 scale-95"
+            }`}
           >
             {/* Main Hero Image Container */}
             <div
@@ -218,8 +221,7 @@ export default function Hero() {
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #002041, #003566)",
+                    background: "linear-gradient(135deg, #002041, #003566)",
                   }}
                 >
                   <span className="material-symbols-outlined text-white text-xl">
@@ -315,8 +317,7 @@ export default function Hero() {
             <div
               className="absolute top-4 -left-4 sm:-left-6 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center animate-float-fast"
               style={{
-                background:
-                  "linear-gradient(135deg, #006399, #67bafd)",
+                background: "linear-gradient(135deg, #006399, #67bafd)",
                 boxShadow: "0 8px 24px rgba(0, 99, 153, 0.3)",
               }}
             >

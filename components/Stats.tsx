@@ -5,26 +5,43 @@ export default function Stats() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="md:col-span-2 bg-primary cloud-gradient p-12 rounded-[2rem] text-on-primary flex flex-col justify-center relative overflow-hidden">
             <div className="absolute top-0 right-0 p-8 opacity-20">
-              <span className="material-symbols-outlined text-9xl">rocket_launch</span>
+              <span className="material-symbols-outlined text-9xl">
+                rocket_launch
+              </span>
             </div>
-            <h3 className="text-4xl font-headline font-black mb-4">READY FOR LIFT OFF?</h3>
+            <h3 className="text-4xl font-headline font-black mb-4">
+              READY FOR LIFT OFF?
+            </h3>
             <p className="text-lg opacity-90 max-w-sm">
-              Join over 50+ students from MAIT exploring the vast cloud stratosphere.
+              Join over 50+ students from MAIT exploring the vast cloud
+              stratosphere.
             </p>
           </div>
           <div className="bg-tertiary-container p-8 rounded-[2rem] flex flex-col items-center justify-center text-center">
-            <span className="text-6xl font-headline font-black text-on-tertiary-container">--</span>
-            <span className="font-label uppercase font-bold text-on-tertiary-container mt-2">Workshops</span>
+            <span className="text-6xl font-headline font-black text-on-tertiary-container">
+              --
+            </span>
+            <span className="font-label uppercase font-bold text-on-tertiary-container mt-2">
+              Workshops
+            </span>
           </div>
           <div className="bg-secondary-container p-8 rounded-[2rem] flex flex-col items-center justify-center text-center">
-            <span className="text-6xl font-headline font-black text-on-secondary-container">--</span>
-            <span className="font-label uppercase font-bold text-on-secondary-container mt-2">Projects</span>
+            <span className="text-6xl font-headline font-black text-on-secondary-container">
+              --
+            </span>
+            <span className="font-label uppercase font-bold text-on-secondary-container mt-2">
+              Projects
+            </span>
           </div>
           <div className="bg-surface-container-high md:col-span-1 p-8 rounded-[2rem] flex flex-col items-center justify-center text-center">
-            <span className="text-6xl font-headline font-black text-primary">--</span>
-            <span className="font-label uppercase font-bold text-on-surface-variant mt-2">Avg Rating</span>
+            <span className="text-6xl font-headline font-black text-primary">
+              --
+            </span>
+            <span className="font-label uppercase font-bold text-on-surface-variant mt-2">
+              Avg Rating
+            </span>
           </div>
-          <div className="md:col-span-3 bg-surface-container-highest p-12 rounded-[2rem] flex items-center gap-8">
+          <div className="md:col-span-3 bg-surface-container-highest p-6 sm:p-8 md:p-12 rounded-[2rem] flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
             <div className="flex -space-x-4">
               <img
                 className="w-16 h-16 rounded-full border-4 border-surface-container-highest"
@@ -45,9 +62,13 @@ export default function Stats() {
                 +200
               </div>
             </div>
-            <div>
-              <p className="text-xl font-headline font-bold">"Best community for cloud growth in MAIT!"</p>
-              <p className="text-on-surface-variant">Trusted by the next generation of builders</p>
+            <div className="text-center sm:text-left max-w-2xl">
+              <p className="text-lg sm:text-xl font-headline font-bold leading-snug text-balance">
+                "Best community for cloud growth in MAIT!"
+              </p>
+              <p className="mt-2 text-sm sm:text-base text-on-surface-variant leading-relaxed text-balance">
+                Trusted by the next generation of builders
+              </p>
             </div>
           </div>
         </div>

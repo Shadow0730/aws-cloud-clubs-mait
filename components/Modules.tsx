@@ -28,9 +28,9 @@ const slides = [
 
 export default function Modules() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
   // Total slides including duplicates for seamless loop
   const extendedSlides = [...slides, ...slides, ...slides];
@@ -78,28 +78,35 @@ export default function Modules() {
   const goToSlide = (direction: "prev" | "next") => {
     stopAutoPlay();
     setCurrentIndex((prev) =>
-      direction === "next" ? prev + 1 : Math.max(prev - 1, 0)
+      direction === "next" ? prev + 1 : Math.max(prev - 1, 0),
     );
     startAutoPlay();
   };
 
-  // Each card width + gap (percentage-based for responsiveness)
-  const [cardWidthPercent, setCardWidthPercent] = useState(30);
-  const gapPercent = 2;
+  // Each card width + gap (container-based for consistent alignment)
+  const [cardWidthPx, setCardWidthPx] = useState(360);
+  const [gapPx, setGapPx] = useState(24);
 
   useEffect(() => {
-    const handleResize = () => {
+    const updateCardMetrics = () => {
+      const viewportWidth = viewportRef.current?.clientWidth;
+      if (!viewportWidth) return;
+
       if (window.innerWidth < 768) {
-        setCardWidthPercent(85); // Mobile width
+        setCardWidthPx(Math.max(260, Math.floor(viewportWidth * 0.84)));
+        setGapPx(14);
       } else if (window.innerWidth < 1024) {
-        setCardWidthPercent(45); // Tablet width
+        setCardWidthPx(Math.max(300, Math.floor(viewportWidth * 0.48)));
+        setGapPx(18);
       } else {
-        setCardWidthPercent(30); // Desktop width
+        setCardWidthPx(Math.max(320, Math.floor(viewportWidth * 0.31)));
+        setGapPx(24);
       }
     };
-    handleResize(); // Initial set
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    updateCardMetrics();
+    window.addEventListener("resize", updateCardMetrics);
+    return () => window.removeEventListener("resize", updateCardMetrics);
   }, []);
 
   return (
@@ -115,8 +122,8 @@ export default function Modules() {
               EXPAND YOUR ARSENAL
             </h2>
             <p className="text-lg leading-relaxed text-on-surface-variant">
-              The tools, the community, and the knowledge you need to master
-              the AWS infrastructure.
+              The tools, the community, and the knowledge you need to master the
+              AWS infrastructure.
             </p>
           </div>
           <div className="flex gap-3">
@@ -139,88 +146,81 @@ export default function Modules() {
 
         {/* Progress Dots */}
 
-      </div>
-
-      {/* Carousel Track */}
-      <div
-        className="relative"
-        onMouseEnter={() => {
-          setIsHovered(true);
-          stopAutoPlay();
-        }}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          startAutoPlay();
-        }}
-      >
+        {/* Carousel Track */}
         <div
-          ref={trackRef}
-          className="flex"
-          style={{
-            gap: `${gapPercent}vw`,
-            paddingLeft: "6vw",
-            transform: `translateX(-${currentIndex * (cardWidthPercent + gapPercent)}vw)`,
-            transition:
-              "transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-          }}
+          className="relative"
+          onMouseEnter={stopAutoPlay}
+          onMouseLeave={startAutoPlay}
         >
-          {extendedSlides.map((slide, index) => {
-            const isActive =
-              index % slides.length === currentIndex % slides.length;
-            return (
-              <div
-                key={index}
-                className="relative flex-shrink-0 rounded-2xl overflow-hidden group cursor-pointer"
-                style={{
-                  width: `${cardWidthPercent}vw`,
-                  aspectRatio: "4/3",
-                  minHeight: "280px",
-                  maxHeight: "420px",
-                  transition: "transform 0.5s ease",
-                  transform: isActive ? "scale(1)" : "scale(0.96)",
-                  opacity: 1,
-                }}
-              >
-                {/* Background Image */}
-                <Image
-                  src={slide.image}
-                  alt={slide.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="30vw"
-                />
-
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-10 bg-gradient-to-t from-black/50 to-transparent">
-                  <h3
-                    className="text-xl md:text-2xl font-headline font-bold mb-1 drop-shadow-md"
-                    style={{ color: "#ffffff" }}
-                  >
-                    {slide.title}
-                  </h3>
-                  <p
-                    className="text-sm font-body drop-shadow-md"
-                    style={{ color: "rgba(255, 255, 255, 0.9)" }}
-                  >
-                    {slide.subtitle}
-                  </p>
-                </div>
-
-                {/* Top-right active indicator */}
-                {isActive && (
+          <div ref={viewportRef} className="overflow-hidden">
+            <div
+              ref={trackRef}
+              className="flex"
+              style={{
+                gap: `${gapPx}px`,
+                transform: `translateX(-${currentIndex * (cardWidthPx + gapPx)}px)`,
+                transition:
+                  "transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              }}
+            >
+              {extendedSlides.map((slide, index) => {
+                const isActive =
+                  index % slides.length === currentIndex % slides.length;
+                return (
                   <div
-                    className="absolute top-4 right-4 w-2 h-2 rounded-full"
+                    key={index}
+                    className="relative flex-shrink-0 rounded-2xl overflow-hidden group cursor-pointer"
                     style={{
-                      background: "var(--color-primary)",
-                      boxShadow: "0 0 8px var(--color-primary-fixed-dim)",
+                      width: `${cardWidthPx}px`,
+                      aspectRatio: "4/3",
+                      minHeight: "280px",
+                      maxHeight: "420px",
+                      transition: "transform 0.5s ease",
+                      transform: isActive ? "scale(1)" : "scale(0.96)",
+                      opacity: 1,
                     }}
-                  />
-                )}
-              </div>
-            );
-          })}
-        </div>
+                  >
+                    {/* Background Image */}
+                    <Image
+                      src={slide.image}
+                      alt={slide.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 767px) 84vw, (max-width: 1023px) 48vw, 31vw"
+                    />
 
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 z-10 bg-gradient-to-t from-black/50 to-transparent">
+                      <h3
+                        className="text-xl md:text-2xl font-headline font-bold mb-1 drop-shadow-md"
+                        style={{ color: "#ffffff" }}
+                      >
+                        {slide.title}
+                      </h3>
+                      <p
+                        className="text-sm font-body drop-shadow-md"
+                        style={{ color: "rgba(255, 255, 255, 0.9)" }}
+                      >
+                        {slide.subtitle}
+                      </p>
+                    </div>
+
+                    {/* Top-right active indicator */}
+                    {isActive && (
+                      <div
+                        className="absolute top-4 right-4 w-2 h-2 rounded-full"
+                        style={{
+                          background: "var(--color-primary)",
+                          boxShadow: "0 0 8px var(--color-primary-fixed-dim)",
+                        }}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

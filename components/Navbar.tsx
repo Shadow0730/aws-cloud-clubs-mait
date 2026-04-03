@@ -11,6 +11,9 @@ const NAV_LINKS = [
   { name: "Community", href: "/community", badge: "04" },
 ];
 
+const JOIN_CLUB_HREF =
+  "https://www.meetup.com/aws-cloud-club-at-maharaja-agrasen-inst-of-technology/";
+
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,12 +66,14 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="hidden rounded-full border-2 border-on-primary-fixed bg-primary px-8 py-3 font-headline font-bold text-on-primary transition-all duration-200 hover:scale-105 active:scale-95 md:inline-flex"
+          <Link
+            href={JOIN_CLUB_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex items-center justify-center bg-primary text-on-primary px-6 py-3 rounded-full font-headline text-sm font-black pixel-hard-shadow hover:scale-105 active:scale-95 transition-all border-2 border-on-primary-fixed"
           >
-            Join Us
-          </button>
+            JOIN THE CLUB
+          </Link>
 
           <button
             type="button"
@@ -165,16 +170,14 @@ export default function Navbar() {
             })}
           </div>
 
-          <button
-            type="button"
-            className="relative mt-3 w-full overflow-hidden rounded-2xl border-2 border-on-primary-fixed bg-primary px-6 py-3 font-headline font-black tracking-wide text-on-primary shadow-lg shadow-primary/20 transition-all duration-200 active:scale-95"
+          <Link
+            href={JOIN_CLUB_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex w-full items-center justify-center bg-primary text-on-primary px-6 py-3 rounded-full font-headline text-base font-black tracking-wide pixel-hard-shadow hover:scale-[1.02] active:scale-95 transition-all border-2 border-on-primary-fixed"
           >
-            <span className="relative z-10">Join Us</span>
-            <span
-              className="pointer-events-none absolute -left-12 top-0 h-full w-10 -skew-x-12 bg-on-primary/30"
-              aria-hidden="true"
-            />
-          </button>
+            JOIN THE CLUB
+          </Link>
 
           <p className="relative pt-2 text-center text-xs text-on-surface-variant font-body">
             Build. Ship. Repeat.

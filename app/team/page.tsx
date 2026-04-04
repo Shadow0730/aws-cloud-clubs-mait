@@ -4,7 +4,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TeamCard from "@/components/TeamCard";
-import TeamGridView from "@/components/TeamGridview";
+import TeamSection from "@/components/TeamSection";
 import FacultySection from "@/components/FacultySection";
 
 
@@ -58,7 +58,7 @@ export default function TeamPage() {
             </div>
           </div>
 
-          <div className="mt-10">{view === "cards" ? <TeamCard /> : <TeamGridView />}</div>
+          <div className="mt-10">{view === "cards" ? <TeamCard /> : <TeamSection />}</div>
         </section>
       </main>
 

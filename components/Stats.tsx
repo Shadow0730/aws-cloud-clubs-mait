@@ -1,3 +1,8 @@
+import Link from "next/link";
+
+const JOIN_CLUB_HREF =
+  "https://www.meetup.com/aws-cloud-club-at-maharaja-agrasen-inst-of-technology/";
+
 export default function Stats() {
   return (
     <section className="py-24">
@@ -13,7 +18,7 @@ export default function Stats() {
               READY FOR LIFT OFF?
             </h3>
             <p className="text-lg opacity-90 max-w-sm">
-              Join over 50+ students from MAIT exploring the vast cloud
+              Join 101 students from MAIT exploring the vast cloud
               stratosphere.
             </p>
           </div>
@@ -41,35 +46,29 @@ export default function Stats() {
               Avg Rating
             </span>
           </div>
-          <div className="md:col-span-3 bg-surface-container-highest p-6 sm:p-8 md:p-12 rounded-[2rem] flex flex-col sm:flex-row items-center gap-6 sm:gap-8">
-            <div className="flex -space-x-4">
-              <img
-                className="w-16 h-16 rounded-full border-4 border-surface-container-highest"
-                alt="Student profile 1"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv9ipcpwvWErgq-EuR4oLFNn8Yw3ffACXZ6aEI6gNJjIukb5XwvVfvLzwhEXwVWOMKGl42aFeBD7HGKryzA3vqoJQPE54_n5YfDPg-HgMoU6OO8dI208o2pBJixG9anOf5nGM1rf4_L7cIR1HMdNxj4xtfzhjoxwv3Wp59O5DMWPxOgKFhQtxQddOh6rbN1ZXq02nDMRUG2ljcCbkJ6uq0LOK-hD8-JVoMIwC-VAYNTsAQdLeLzCPHqIoHd2OGhStO4X1qI7sA46PX"
-              />
-              <img
-                className="w-16 h-16 rounded-full border-4 border-surface-container-highest"
-                alt="Student profile 2"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQn0vL07Brj-tac70g4qXyR78sTaLCwOpzG7bCsN-3XA7J4SI_usPgI3P94u4Pfm3TDOgcqkyJef_mf2Y-HmbQF1mQ4uGdJXypB51vuZGA-qu4JBwIrjRGUV-6gRoGgSc_E16nVY3zPSoFYC5_Q4IyWVbm3wrcguuNrJ62WtK4fqPas5OtlrGmRHlffcidqthppPKOYMsx2Apy1xBmaDCD6b6Xz7cwHh_V5fhtXLvfb9Y3bHD5CZ57Egd4AExCQgSaOOmEXG1nixiX"
-              />
-              <img
-                className="w-16 h-16 rounded-full border-4 border-surface-container-highest"
-                alt="Student profile 3"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzfBNk6Ez6P8pPEZcS97bTliH2a27F47EeIgb9ZYYhPYydx-qmnSsoL3xSNCeWLBQO447AG404uZv0MEvX1X1N4Dn0n45LWc-XumWeCTDxr0vMU3ax9BpfVX7nLFvpIvXMh2nR3OGxlxLKUYr_FI-8f57TDPP4TgmF45sw2Dev5XAPBoU8FWA_o0JhvqBJDlN77ZY6Ri9tYYqCfzOruCaENQfSTYUf6ysehb1KdupVq-g6OQmCTtU30MZQKMrpEoH3HZYXze4LToTO"
-              />
-              <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold border-4 border-surface-container-highest">
-                +200
+          <div className="md:col-span-3 bg-surface-container-highest p-6 sm:p-8 md:p-12 rounded-[2rem] flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
+              <span className="text-6xl md:text-7xl font-headline font-black text-primary leading-none tabular-nums">
+                101
+              </span>
+              <div className="max-w-md">
+                <p className="text-lg sm:text-xl font-headline font-bold leading-snug text-balance">
+                  Builders and counting
+                </p>
+                <p className="mt-2 text-sm sm:text-base text-on-surface-variant leading-relaxed text-balance">
+                  Students from MAIT learning, building and shipping on AWS
+                  together.
+                </p>
               </div>
             </div>
-            <div className="text-center sm:text-left max-w-2xl">
-              <p className="text-lg sm:text-xl font-headline font-bold leading-snug text-balance">
-                "Best community for cloud growth in MAIT!"
-              </p>
-              <p className="mt-2 text-sm sm:text-base text-on-surface-variant leading-relaxed text-balance">
-                Trusted by the next generation of builders
-              </p>
-            </div>
+            <Link
+              href={JOIN_CLUB_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center justify-center bg-primary text-on-primary px-8 py-4 rounded-full font-headline text-base font-black pixel-hard-shadow hover:scale-105 active:scale-95 transition-all border-2 border-on-primary-fixed"
+            >
+              JOIN THEM
+            </Link>
           </div>
         </div>
       </div>

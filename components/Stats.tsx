@@ -18,7 +18,7 @@ export default function Stats() {
               READY FOR LIFT OFF?
             </h3>
             <p className="text-lg opacity-90 max-w-sm">
-              Join 101 students from MAIT exploring the vast cloud
+              Join 100+ students from MAIT exploring the vast cloud
               stratosphere.
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function Stats() {
           <div className="md:col-span-3 bg-surface-container-highest p-6 sm:p-8 md:p-12 rounded-[2rem] flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-8">
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
               <span className="text-6xl md:text-7xl font-headline font-black text-primary leading-none tabular-nums">
-                101
+                100+
               </span>
               <div className="max-w-md">
                 <p className="text-lg sm:text-xl font-headline font-bold leading-snug text-balance">

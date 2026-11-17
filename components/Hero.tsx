@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const MEMBER_COUNT = 101;
+const MEMBER_COUNT = 100;
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -186,7 +186,11 @@ export default function Hero() {
                 className="font-label font-bold text-xs tracking-[0.1em] uppercase"
                 style={{ color: "#4c1d95" }}
               >
-                <span className="tabular-nums">{memberCount}</span> Members
+                <span className="tabular-nums">
+                  {memberCount}
+                  {memberCount === MEMBER_COUNT ? "+" : ""}
+                </span>{" "}
+                Members
               </p>
               <p className="text-xs font-body" style={{ color: "#737780" }}>
                 Growing community

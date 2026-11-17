@@ -3,11 +3,35 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+const MEMBER_COUNT = 101;
+
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
+  const [memberCount, setMemberCount] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
+  }, []);
+
+  // Count the member number up from 0 once the hero appears
+  useEffect(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const duration = reduceMotion ? 0 : 1600;
+    let start: number | null = null;
+    let frame = 0;
+
+    const tick = (now: number) => {
+      if (start === null) start = now;
+      const progress = duration === 0 ? 1 : Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setMemberCount(Math.round(eased * MEMBER_COUNT));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (
@@ -87,7 +111,7 @@ export default function Hero() {
               </span>
             </span>
             <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl block mt-1">
-              BUILDER CLUB.
+              BUILDER GROUP.
             </span>
           </h1>
 
@@ -162,7 +186,7 @@ export default function Hero() {
                 className="font-label font-bold text-xs tracking-[0.1em] uppercase"
                 style={{ color: "#4c1d95" }}
               >
-                +20 Members
+                <span className="tabular-nums">{memberCount}</span> Members
               </p>
               <p className="text-xs font-body" style={{ color: "#737780" }}>
                 Growing community

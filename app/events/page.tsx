@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventCard, { EventCardProps } from "@/components/EventCard";
+import UpcomingEventsNotice from "@/components/UpcomingEventsNotice";
 
 const upcomingEvents: EventCardProps[] = [
   {
@@ -35,19 +36,57 @@ const upcomingEvents: EventCardProps[] = [
 
 const pastEvents: EventCardProps[] = [
   {
-    title: "Deploying Your First Web App on EC2",
-    date: "March 5, 2026",
-    time: "3:00 PM",
-    location: "Lab 42, MAIT",
-    description: "A hands-on session where students learned how to spin up EC2 instances, configure security groups, and host a simple React application on AWS.",
+    title: "AWS Cloud Genesis ’26",
+    date: "September 22, 2026",
+    time: "1:00 PM",
+    location: "Auditorium, MAIT",
+    description: "AWS Cloud Genesis ’26 is an exciting celebration of technology, innovation, learning, and community at MAIT. The event brings together students, industry professionals, and faculty for insightful sessions, engaging activities, interactive quizzes, and vibrant performances. Join us as we explore ideas, learn from inspiring speakers, and celebrate the spirit of innovation together.",
+    image:"https://media.licdn.com/dms/image/v2/D5622AQGiaUColZDc0w/feedshare-shrink_800/B56aDVKjEEIUAc-/0/1790282712913?e=1796860800&v=beta&t=mHiOrW27k5nMgghQNlxjRw9RfbhZbyILwiEhC-chYXc",
     type: "past",
   },
   {
-    title: "AWS Certification Study Group",
-    date: "February 20, 2026",
+    title: "Beyond GenAI - AWS AI Services",
+    date: "July 19, 2026",
     time: "5:00 PM",
-    location: "Mini Auditorium",
-    description: "A collaborative study session focused on the AWS Certified Cloud Practitioner exam. We covered core services, pricing models, and security.",
+    location: "Online",
+    description: "Go beyond Generative AI and explore the broader AWS AI ecosystem with an industry expert. Learn about real-world AI applications, understand when and how to use different AWS AI services, see practical examples, and interact with the speaker during a live Q&A session.",
+    image:"https://media.licdn.com/dms/image/v2/D5622AQHImUaqZgtJVg/feedshare-image-high-res/B56Z.s5EnoK4Ac-/0/1785312070385?e=1796860800&v=beta&t=2pyb1bCs6KdQXP0IygqaV64Z9tC4iVWWaRR_E_RV6d0",
+    type: "past",
+  },
+  {
+    title: "From PartyRock to Amazon Bedrock",
+    date: "July 18, 2026",
+    time: "5:00 PM",
+    location: "Online",
+    description: "Learn how to build production-ready Generative AI applications using Amazon Bedrock. Explore foundation models, prompt engineering techniques, and the differences between PartyRock and Bedrock through practical examples.",
+    image:"https://media.licdn.com/dms/image/v2/D5622AQEtcS_Sm-2TCQ/feedshare-shrink_1280/B56Z.lg3J8KoAQ-/0/1785188283272?e=1796860800&v=beta&t=2qB11I8cgzD8fTfM-Iivg1wmbZevf7D6WsF43bXsz4Y",
+    type: "past",
+  },
+  {
+    title: "Build Your First AI App with PartyRock",
+    date: "July 12, 2026",
+    time: "5:00 PM",
+    location: "Online",
+    description: "In this hands-on session, you'll build your first AI application using AWS PartyRock. Guided by an AWS expert, you'll learn how to turn simple prompts into functional AI-powered apps—no coding experience required.Whether you're exploring Generative AI for the first time or looking to build something practical, this session will help you bring your ideas to life.",
+    image:"https://media.licdn.com/dms/image/v2/D5622AQGmAJ7J3ysGpQ/feedshare-shrink_1280/B56Z.Fd7SAGUAM-/0/1784650642859?e=1796860800&v=beta&t=yf8qbnurMS_svkZCoSj-WKmK14oxvr1bX8KiJFrtCPQ",
+    type: "past",
+  },
+  {
+    title: "Introduction to Generative AI on AWS",
+    date: "July 11, 2026",
+    time: "5:00 PM",
+    location: "Online",
+    description: "In this introductory session, you'll learn the fundamentals of Generative AI, Large Language Models (LLMs), and real-world applications. Whether you're a beginner or just getting started with AI on AWS, this session will provide a strong foundation for the rest of the series.",
+    image:"https://media.licdn.com/dms/image/v2/D5622AQHR-y8SlDQ8pg/feedshare-shrink_1280/B56Z.FWoQTKEAM-/0/1784648729939?e=1796860800&v=beta&t=8g16OV6CeycGMG-cBCsvVy3WvXckf-Kopix6Encilcw",
+    type: "past",
+  },
+  {
+    title: "Build with Cloud AWS Cloud Club MAIT Intro Event",
+    date: "April 1, 2026",
+    time: "1:00 PM",
+    location: "11th Block,MAIT",
+    description: "Explore how modern applications are built and scaled using Amazon Web Services.Get hands-on experience with real AWS tools, learn cloud fundamentals, and understand real-world applications — all in one session.",
+    image:"https://media.licdn.com/dms/image/v2/D5622AQHQjtb9UKydXw/feedshare-shrink_800/B56Z1W.8soHoAc-/0/1775280835616?e=1796860800&v=beta&t=2w48qMphnbGj3GkCc46ysV5Li_ojC-G6SWmrjSh__bo",
     type: "past",
   }
 ];
@@ -83,7 +122,6 @@ export default function EventsPage() {
             </p>
           </div>
 
-          {/* Upcoming Events Section */}
           <div className="mb-20">
             <h2 className="text-3xl font-headline font-bold text-on-surface mb-8 flex items-center gap-3">
               <span className="material-symbols-outlined text-primary text-4xl">
@@ -91,11 +129,7 @@ export default function EventsPage() {
               </span>
               Upcoming Events
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {upcomingEvents.map((event, index) => (
-                <EventCard key={index} {...event} />
-              ))}
-            </div>
+            <UpcomingEventsNotice />
           </div>
 
           {/* Past Events Section */}

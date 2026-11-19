@@ -11,57 +11,40 @@ import {
 type Platform = {
   key: string;
   name: string;
-  description: string;
-  cta: string;
   href: string;
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
-  iconPanel: string;
-  buttonTone: string;
 };
 
 const platforms: Platform[] = [
   {
     key: "whatsapp",
     name: "WhatsApp",
-    description:
-      "Daily updates, quick coordination, and instant community chats.",
-    cta: "Join WhatsApp",
-    href: "#",
+    href: "https://wa.me/?text=I%27d%20like%20to%20join%20AWS%20Cloud%20Club%20MAIT",
     Icon: IconWhatsApp,
-    iconPanel: "bg-[#128c7e] text-[#e7fff9]",
-    buttonTone: "bg-[#25d366] text-[#083c30]",
   },
   {
     key: "linkedin",
     name: "LinkedIn",
-    description:
-      "Professional networking, career opportunities, and club achievements.",
-    cta: "Follow Page",
     href: "https://www.linkedin.com/company/aws-cloud-club-maitt/",
     Icon: IconLinkedIn,
-    iconPanel: "bg-[#214b63] text-[#a4dcff]",
-    buttonTone: "bg-[#0b6d8c] text-white",
   },
   {
     key: "instagram",
     name: "Instagram",
-    description:
-      "Vlogs, event highlights, and a look into the MAIT campus life.",
-    cta: "Follow Us",
     href: "https://www.instagram.com/awscloudclub_mait",
     Icon: IconInstagram,
-    iconPanel: "bg-linear-to-br from-[#e93e92] to-[#d93472] text-[#ffe7f3]",
-    buttonTone: "bg-[#f8c803] text-[#2a2f32]",
+  },
+  {
+    key: "email",
+    name: "Email",
+    href: "https://mail.google.com/mail/u/0/?fs=1&to=awsacademymait@gmail.com&tf=cm",
+    Icon: IconEmail,
   },
   {
     key: "meetup",
     name: "Meetup",
-    description: "Workshops, bootcamps, and cloud summits happening in person.",
-    cta: "Join Group",
-    href: "https://meetup.com/aws-cloud-club-at-maharaja-agrasen-inst-of-technology",
+    href: "https://www.meetup.com/aws-sbg-at-maharaja-agrasen-institute-of-technology/",
     Icon: IconMeetup,
-    iconPanel: "bg-[#4c1d95] text-[#e9d5ff]",
-    buttonTone: "bg-[#7c3aed] text-white",
   },
 ];
 
@@ -90,33 +73,47 @@ export default function CommunitySection() {
   return (
     <section
       ref={sectionRef}
-      className="px-4 py-20 sm:px-6"
+      className="relative isolate overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:py-24"
       aria-labelledby="community-heading"
     >
-      <div className="mx-auto max-w-7xl">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 mx-auto h-80 max-w-5xl rounded-full bg-primary/5 blur-3xl"
+      />
+      <div className="mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-20">
         <div
-          className={`text-center transition-all duration-500 ${
+          className={`max-w-xl transition-all duration-500 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
           }`}
         >
+          <p className="mb-5 font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary sm:text-sm">
+            {"AWS Cloud Club \u00B7 MAIT"}
+          </p>
           <h2
             id="community-heading"
-            className="font-headline text-4xl font-black tracking-tight text-on-surface sm:text-5xl"
+            className="font-headline text-4xl font-black leading-[1.08] tracking-tight text-on-surface sm:text-5xl lg:text-6xl"
           >
-            Connect with Us
+            Find your cloud community
           </h2>
-          <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-primary" />
+          <div className="mt-6 h-1 w-16 rounded-full bg-primary" />
+          <p className="mt-6 max-w-lg font-body text-base leading-7 text-on-surface-variant sm:text-lg sm:leading-8">
+            Learn, build, and grow alongside fellow cloud enthusiasts. Join the
+            conversation on the platform that feels right for you.
+          </p>
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="w-full border-t border-outline-variant/70">
           {platforms.map((platform, index) => {
             const { Icon } = platform;
             const isExternal = /^https?:\/\//.test(platform.href);
 
             return (
-              <article
+              <a
                 key={platform.key}
-                className={`rounded-3xl border border-outline-variant/40 bg-surface-container-lowest px-5 py-6 text-center shadow-[0_10px_30px_rgba(124,58,237,0.10)] transition-all duration-300 hover:-translate-y-1 ${
+                href={platform.href}
+                target={isExternal && platform.key !== "email" ? "_blank" : undefined}
+                rel={isExternal && platform.key !== "email" ? "noopener noreferrer" : undefined}
+                className={`group relative isolate flex min-h-24 w-full items-center gap-4 overflow-hidden border-b border-outline-variant/70 py-5 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary sm:gap-6 sm:py-7 lg:gap-8 lg:py-8 ${
                   isVisible
                     ? "animate-fade-in-up motion-reduce:animate-none"
                     : "translate-y-5 opacity-0"
@@ -127,31 +124,33 @@ export default function CommunitySection() {
                     : undefined
                 }
               >
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-surface-container">
-                  <span
-                    className={`inline-flex h-11 w-11 items-center justify-center rounded-lg ${platform.iconPanel}`}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </span>
-                </div>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 z-0 origin-left scale-x-0 bg-primary/10 transition-transform duration-[750ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 group-focus-visible:scale-x-100 motion-reduce:transition-none"
+                />
+                <span className="relative z-10 w-7 shrink-0 font-label text-xs font-medium tracking-wider text-on-surface-variant/75 sm:w-10 sm:text-sm">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="relative z-10 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-outline-variant bg-transparent text-primary transition-[background-color,border-color,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-primary group-hover:bg-primary group-hover:text-white group-focus-visible:border-primary group-focus-visible:bg-primary group-focus-visible:text-white motion-reduce:transition-none sm:h-14 sm:w-14">
+                  <Icon className="h-6 w-6" />
+                </span>
 
-                <h3 className="mt-5 font-headline text-2xl font-black text-primary">
+                <span className="relative z-10 min-w-0 flex-1 font-headline text-2xl font-medium tracking-tight text-on-surface transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-primary group-focus-visible:text-primary motion-reduce:transition-none sm:text-3xl lg:text-4xl">
                   {platform.name}
-                </h3>
-
-                <p className="mt-3 min-h-20 text-sm leading-relaxed text-on-surface-variant font-body">
-                  {platform.description}
-                </p>
-
-                <a
-                  href={platform.href}
-                  target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                  className={`pixel-hard-shadow mt-5 inline-flex w-full items-center justify-center rounded-full px-4 py-3 font-headline text-sm font-black tracking-wide transition-all duration-200 hover:-translate-y-0.5 ${platform.buttonTone}`}
-                >
-                  {platform.cta}
-                </a>
-              </article>
+                </span>
+                <span className="relative z-10 inline-flex shrink-0 items-center text-primary">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    className="h-7 w-7 rotate-[-45deg] opacity-60 transition-[transform,opacity] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5 group-hover:opacity-100 group-focus-visible:translate-x-1.5 group-focus-visible:opacity-100 motion-reduce:transition-none sm:h-8 sm:w-8"
+                  >
+                    <path d="M5 12h14m-6-6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </a>
             );
           })}
         </div>
@@ -198,6 +197,15 @@ function IconLinkedIn(props: SVGProps<SVGSVGElement>) {
       <path d="M7 11v6" />
       <path d="M11 11v6" />
       <path d="M11 13.5c0-1.4 1-2.5 2.4-2.5S16 12.1 16 13.5V17" />
+    </svg>
+  );
+}
+
+function IconEmail(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m4 7 8 6 8-6" />
     </svg>
   );
 }

@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import CommunityFooter from "@/components/CommunityFooter";
 import CommunitySection from "@/components/CommunitySection";
 
 export default function CommunityPage() {
@@ -9,7 +9,7 @@ export default function CommunityPage() {
       <main className="min-h-screen bg-surface pt-24">
         <CommunitySection />
       </main>
-      <Footer />
+      <CommunityFooter />
     </>
   );
 }

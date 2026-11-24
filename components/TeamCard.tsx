@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+
+import { useRef, useState } from "react";
 import TeamCard2D from "@/components/TeamCard2D";
 import { teamMembers } from "@/components/teamdata";
 
@@ -8,15 +9,15 @@ const CARD_W = 320;
 const CARD_H = 420;
 
 // Put your back image in: public/team/screen2.png (or change this)
-const CARD_BACK_SRC = "/team/screen2.png";
+const CARD_BACK_SRC = "/team/card-back.png";
 
-type Anim = "idle" | "toLeft" | "toRight";
+
 
 export default function TeamCard() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [anim, setAnim] = useState<Anim>("idle");
+const touchStart = useRef<{ x: number; y: number } | null>(null);
 
-  const active = useMemo(() => teamMembers[activeIndex], [activeIndex]);
+const active = teamMembers[activeIndex];
 
   const leftRemaining = activeIndex; // how many are behind us on the left
   const rightRemaining = teamMembers.length - activeIndex - 1;
@@ -25,34 +26,58 @@ export default function TeamCard() {
   const rightCount = Math.min(rightRemaining, 3);
 
   const goNext = () => {
-    if (anim !== "idle") return;
-    setAnim("toLeft");
+  setActiveIndex((i) => (i + 1) % teamMembers.length);
+};
 
-    window.setTimeout(() => {
-      setAnim("idle");
-      setActiveIndex((i) => (i + 1) % teamMembers.length);
-    }, 420);
-  };
+const goPrev = () => {
+  setActiveIndex(
+    (i) => (i - 1 + teamMembers.length) % teamMembers.length
+  );
+};
 
-  const goPrev = () => {
-    if (anim !== "idle") return;
-    setAnim("toRight");
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+  const touch = event.touches[0];
 
-    window.setTimeout(() => {
-      setAnim("idle");
-      setActiveIndex((i) => (i - 1 + teamMembers.length) % teamMembers.length);
-    }, 420);
-  };
+  if (touch) {
+    touchStart.current = {
+      x: touch.clientX,
+      y: touch.clientY,
+    };
+  }
+};
+
+const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+  const start = touchStart.current;
+  const touch = event.changedTouches[0];
+
+  touchStart.current = null;
+
+ if (!start || !touch) return;
+
+  const deltaX = touch.clientX - start.x;
+  const deltaY = touch.clientY - start.y;
+
+  // Ignore vertical scrolling and small movements.
+  if (Math.abs(deltaX) < 50 || Math.abs(deltaX) <= Math.abs(deltaY)) {
+    return;
+  }
+
+  if (deltaX < 0) {
+    goNext();
+  } else {
+    goPrev();
+  }
+};
 
   return (
-    <div className="grid items-center gap-10 md:grid-cols-3">
+    <div className="grid w-full min-w-0 grid-cols-1 items-center gap-6 lg:grid-cols-3 xl:gap-10">
       {/* Left deck (click to go previous) */}
-      <div className="hidden md:flex justify-center">
+      <div className="hidden lg:flex justify-center">
         <button
           type="button"
           onClick={goPrev}
-          disabled={anim !== "idle"}
-          className="relative"
+
+          className="relative flex flex-col items-center gap-10"
           aria-label="Previous member"
         >
           <CardStack
@@ -62,61 +87,71 @@ export default function TeamCard() {
           />
           {/* optional hint */}
           {leftRemaining > 0 && (
-            <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-bold text-on-surface-variant">
-              Prev
-            </span>
-          )}
+           <span className="pointer-events-none text-xs font-bold text-on-surface-variant">
+           Prev
+           </span>
+)}
         </button>
       </div>
 
       {/* Center card */}
-      <div className="flex justify-center">
-        <div className="relative" style={{ width: CARD_W, height: CARD_H }}>
-          <div
-            className={[
-              "absolute inset-0",
-              "transition-transform ease-in-out",
-              anim === "toLeft"
-                ? "-translate-x-[140%] scale-[0.96]"
-                : anim === "toRight"
-                  ? "translate-x-[140%] scale-[0.96]"
-                  : "translate-x-0 scale-100",
-            ].join(" ")}
-            style={{ transitionDuration: "420ms" }}
-          >
-            {/* Click on the card = next (you can change to open modal etc.) */}
-            <TeamCard2D member={active} />
-          </div>
+<div className="flex min-w-0 justify-center">
+  <div className="mx-auto w-full max-w-[320px]">
 
-          {/* Mobile controls (since side decks hidden on small screens) */}
-          <div className="mt-4 flex items-center justify-between md:hidden">
-            <button
-              type="button"
-              onClick={goPrev}
-              disabled={anim !== "idle"}
-              className="px-5 py-2 rounded-full border border-surface-variant bg-surface-container-lowest font-headline font-bold text-on-surface-variant hover:text-primary transition-colors"
-            >
-              Prev
-            </button>
-            <button
-              type="button"
-              onClick={goNext}
-              disabled={anim !== "idle"}
-              className="px-5 py-2 rounded-full border border-surface-variant bg-surface-container-lowest font-headline font-bold text-on-surface-variant hover:text-primary transition-colors"
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
+    {/* Member card with swipe support */}
+    <div
+      className="relative h-[390px] w-full touch-pan-y sm:h-[420px]"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={() => {
+        touchStart.current = null;
+      }}
+    >
+      <div className="absolute inset-0">
+  <TeamCard2D member={active} />
+</div>
+    </div>
 
+    {/* Mobile navigation buttons */}
+<div className="mt-4 flex w-full items-center justify-between gap-3 px-1 xl:hidden">
+
+  <button
+    type="button"
+    onClick={goPrev}
+    className="relative z-20 pointer-events-auto touch-manipulation flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full border border-surface-variant bg-surface-container-lowest px-4 py-3 font-headline font-bold text-on-surface-variant hover:text-primary"
+  >
+    <span aria-hidden="true">←</span>
+    Previous
+  </button>
+
+  <button
+    type="button"
+    onClick={goNext}
+    className="relative z-20 pointer-events-auto touch-manipulation flex min-h-11 flex-1 items-center justify-center gap-2 rounded-full border border-surface-variant bg-surface-container-lowest px-4 py-3 font-headline font-bold text-on-surface-variant hover:text-primary"
+  >
+    Next
+    <span aria-hidden="true">→</span>
+  </button>
+
+</div>
+
+    {/* Member counter */}
+    <p className="mt-3 text-center text-sm text-on-surface-variant xl:hidden">
+      Member {activeIndex + 1} of {teamMembers.length}
+      <span className="block text-xs mt-1">
+        Swipe left or right to explore
+      </span>
+    </p>
+
+  </div>
+</div>
       {/* Right deck (click to go next) */}
-      <div className="hidden md:flex justify-center">
+      <div className="hidden lg:flex justify-center">
         <button
           type="button"
           onClick={goNext}
-          disabled={anim !== "idle"}
-          className="relative"
+
+          className="relative flex flex-col items-center gap-10"
           aria-label="Next member"
         >
           <CardStack
@@ -126,8 +161,8 @@ export default function TeamCard() {
           />
           {/* optional hint */}
           {rightRemaining > 0 && (
-            <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-bold text-on-surface-variant">
-              Next
+            <span className="pointer-events-none text-xs font-bold text-on-surface-variant">
+            Next
             </span>
           )}
         </button>

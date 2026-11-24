@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   IconInstagram,
   IconLinkedIn,
@@ -14,23 +13,18 @@ export default function TeamCard2D({
   member: TeamMember;
   onClick?: () => void;
 }) {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   return (
     <button
       type="button"
       onClick={onClick}
       className="
-        group w-[280px] sm:w-[320px] h-[420px]
+       group h-full w-full min-w-0
         rounded-[28px]
         bg-surface-container-lowest
         border border-surface-variant
         shadow-xl shadow-purple-900/10
-        px-8 py-10
+       px-5 py-6 sm:px-8 sm:py-10
         text-left
         transition-transform duration-200
         hover:-translate-y-1
@@ -40,8 +34,8 @@ export default function TeamCard2D({
       aria-label={`View ${member.name}`}
     >
       <div className="flex flex-col items-center text-center h-full">
-        <div className="h-28 w-28 rounded-full bg-surface-container border border-surface-variant overflow-hidden flex items-center justify-center">
-          {hasMounted && member.imageSrc ? (
+        <div className="h-24 w-24 sm:h-28 sm:w-28 rounded-full bg-surface-container border border-surface-variant overflow-hidden flex items-center justify-center">
+          {member.imageSrc ? (
             <img
               src={member.imageSrc}
               alt={member.name}
@@ -54,11 +48,11 @@ export default function TeamCard2D({
           )}
         </div>
 
-        <p className="mt-8 font-headline text-sm font-extrabold tracking-[0.25em] text-primary-container">
-          AWS CLOUD CLUBS
+
+          AWS CLOUD CLUBS<p className="mt-5 sm:mt-8 font-headline text-xs sm:text-sm font-extrabold tracking-[0.25em] text-primary-container">
         </p>
 
-        <h3 className="mt-3 font-headline text-2xl font-black text-on-primary-container">
+        <h3 className="mt-2 break-words font-headline text-xl sm:text-2xl font-black text-on-primary-container">
           {member.name}
         </h3>
 

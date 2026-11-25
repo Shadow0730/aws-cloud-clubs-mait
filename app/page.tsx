@@ -5,6 +5,7 @@ import Modules from "@/components/Modules";
 import HowItWorks from "@/components/HowItWorks";
 import CTA from "@/components/CTA";
 import Contacts from "@/components/Contacts";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -17,8 +18,8 @@ export default function Home() {
         <HowItWorks />
         <CTA />
       </main>
-      {/* Home page uses its own ending (Contacts) instead of the shared Footer */}
       <Contacts />
+      <Footer />
     </>
   );
 }

@@ -12,7 +12,7 @@ const NAV_LINKS = [
 ];
 
 const JOIN_CLUB_HREF =
-  "https://www.meetup.com/aws-cloud-club-at-maharaja-agrasen-inst-of-technology/";
+  "https://www.meetup.com/aws-sbg-at-maharaja-agrasen-inst-of-technology/";
 
 export default function Navbar() {
   const pathname = usePathname();

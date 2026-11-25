@@ -1,9 +1,10 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import TopicStrip from "@/components/TopicStrip";
 import Modules from "@/components/Modules";
-import Stats from "@/components/Stats";
+import HowItWorks from "@/components/HowItWorks";
 import CTA from "@/components/CTA";
-import Footer from "@/components/Footer";
+import Contacts from "@/components/Contacts";
 
 export default function Home() {
   return (
@@ -11,11 +12,13 @@ export default function Home() {
       <Navbar />
       <main className="pt-24">
         <Hero />
+        <TopicStrip />
         <Modules />
-        <Stats />
+        <HowItWorks />
         <CTA />
       </main>
-      <Footer />
+      {/* Home page uses its own ending (Contacts) instead of the shared Footer */}
+      <Contacts />
     </>
   );
 }

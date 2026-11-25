@@ -145,3 +145,43 @@
 .delay-300 {
   animation-delay: 300ms;
 }
+
+/* Home page: topic strip scroll (CSS only, pauses on hover) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Home hero: fade the arm out where the image ends (right and top edges) */
+.hero-arm-fade {
+  -webkit-mask-image:
+    linear-gradient(to left, transparent 3%, #000 18%),
+    linear-gradient(to bottom, transparent 2%, #000 12%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to left, transparent 3%, #000 18%),
+    linear-gradient(to bottom, transparent 2%, #000 12%);
+  mask-composite: intersect;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  /* trims the sub-pixel sliver browsers can leave at the masked edge */
+  clip-path: inset(0 2px 0 0);
+}

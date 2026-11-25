@@ -119,9 +119,9 @@ export default function CommunityFooter() {
         </section>
 
         {/* 3-COLUMN FOOTER GRID */}
-        <div className="mt-16 grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-12 lg:gap-16 items-start">
+        <div className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-12 lg:gap-12 items-start">
           {/* COLUMN 1: BRAND */}
-          <div className="flex items-start gap-4 sm:col-span-2 md:col-span-6 lg:col-span-5">
+          <div className="flex items-start gap-4 sm:col-span-2 md:col-span-5 lg:col-span-4">
             {/* Cloud Avatar Emblem matching mockup */}
             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#ede4ff] p-3 text-[#5b21b6] shadow-sm">
               <svg
@@ -155,26 +155,34 @@ export default function CommunityFooter() {
           </div>
 
           {/* COLUMN 2: EXPLORE */}
-          <div className="md:col-span-3 lg:col-span-3">
+          <div className="md:col-span-4 lg:col-span-5">
             <h3 className="font-headline text-xs font-black uppercase tracking-[0.2em] text-[#6d28d9]">
               EXPLORE
             </h3>
-            <ul className="mt-5 space-y-3 font-body text-sm sm:text-base">
-              {EXPLORE_LINKS.map((item) => (
-                <li key={item.name}>
+            <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:flex sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-2 lg:flex-nowrap lg:gap-x-3.5 font-body text-sm sm:text-base">
+              {EXPLORE_LINKS.map((item, index) => (
+                <li key={item.name} className="flex items-center gap-3 lg:gap-3.5">
                   <Link
                     href={item.href}
-                    className="inline-block py-0.5 font-medium text-[#2e1065] transition-all duration-200 hover:text-primary hover:translate-x-0.5 transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d28d9] rounded"
+                    className="inline-flex min-h-[44px] sm:min-h-0 items-center py-0.5 whitespace-nowrap font-medium text-[#2e1065] transition-colors duration-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6d28d9] rounded"
                   >
                     {item.name}
                   </Link>
+                  {index < EXPLORE_LINKS.length - 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="hidden sm:inline text-[#c9c3d4] select-none"
+                    >
+                      |
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
 
           {/* COLUMN 3: CONNECT */}
-          <div className="md:col-span-3 lg:col-span-4">
+          <div className="md:col-span-3 lg:col-span-3">
             <h3 className="font-headline text-xs font-black uppercase tracking-[0.2em] text-[#6d28d9]">
               CONNECT
             </h3>
